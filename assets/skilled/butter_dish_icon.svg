@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 64 64">
+  <!-- Cute Butter Cube on small plate/toast matching Tost Flip aesthetic -->
+  <g stroke="#5A2E12" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Bottom small plate/toast base -->
+    <path d="M12 44 L32 53 L52 44 L52 40 L32 49 L12 40 Z" fill="#E8D5B5"/>
+    <path d="M12 40 L32 49 L52 40 L32 31 Z" fill="#FFF8EE"/>
+
+    <!-- Butter block sides -->
+    <!-- Left shadow side -->
+    <path d="M17 34 L32 41 L32 24 L17 17 Z" fill="#F4A81D"/>
+    <!-- Right side -->
+    <path d="M32 41 L47 34 L47 17 L32 24 Z" fill="#E29210"/>
+    <!-- Top face (bright butter yellow) -->
+    <path d="M17 17 L32 24 L47 17 L32 10 Z" fill="#FFDC5E"/>
+
+    <!-- Butter highlight & shine -->
+    <path d="M32 24 L32 41" stroke="#5A2E12" stroke-width="2.6"/>
+    <path d="M22 17 L32 21.5 L42 17" fill="none" stroke="#FFF7CC" stroke-width="2"/>
+    <ellipse cx="28" cy="18" rx="2" ry="1" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+</svg>

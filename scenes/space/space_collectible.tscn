@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_collectible"]
+radius = 25.0
+
+[node name="SpaceCollectible" type="Node2D"]
+
+[node name="CollectibleSprite" type="Sprite2D" parent="."]
+
+[node name="CollisionArea" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("CircleShape2D_collectible")

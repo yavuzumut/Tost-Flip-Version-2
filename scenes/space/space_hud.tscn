@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/space_hud.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.97, 0.92, 0.82, 0.94)
+border_color = Color(0.44, 0.26, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+
+[node name="SpaceHUD" type="PanelContainer"]
+custom_minimum_size = Vector2(460, 160)
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 12.0
+offset_right = 230.0
+offset_bottom = 172.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+script = ExtResource("1")
+
+[node name="Column" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 2
+
+[node name="Heading" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.44, 0.26, 0.12, 1)
+theme_override_font_sizes/font_size = 17
+text = "UZAY SANDVİÇİ"
+horizontal_alignment = 1
+
+[node name="AltitudeDisplay" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.19, 0.37, 0.26, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+
+[node name="AltitudeProgress" type="ProgressBar" parent="Column"]
+custom_minimum_size = Vector2(0, 10)
+max_value = 100.0
+show_percentage = false
+
+[node name="OrderDisplay" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.29, 0.22, 0.17, 1)
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="PowerUpDisplay" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.45, 0.31, 0.51, 1)
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="ScoreDisplay" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.44, 0.26, 0.12, 1)
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+
+[node name="ResultPanel" type="Label" parent="Column"]
+theme_override_colors/font_color = Color(0.15, 0.38, 0.24, 1)
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1

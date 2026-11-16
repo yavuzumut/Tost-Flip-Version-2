@@ -1,0 +1,705 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_hud"]
+[ext_resource type="Theme" path="res://ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://ui/balance_meter.gd" id="3_meter"]
+[ext_resource type="Texture2D" path="res://assets/ui/heart_full.svg" id="4_heart_full"]
+[ext_resource type="Texture2D" path="res://assets/ui/heart_empty.svg" id="5_heart_empty"]
+[ext_resource type="Texture2D" path="res://assets/ui/toast_icon.svg" id="6_toast_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/butter_icon.svg" id="7_butter_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/mouse_icon.svg" id="8_mouse_icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/wheat.svg" id="9_wheat"]
+[ext_resource type="Texture2D" path="res://assets/skilled/coin.png" id="10_coin"]
+[ext_resource type="Texture2D" path="res://assets/skilled/chef_hat_badge.png" id="11_badge"]
+[ext_resource type="Script" path="res://ui/sandwich_hud.gd" id="12_sandwich_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold_btn"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.968627, 0.709804, 0.168627, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 6
+border_color = Color(0.556863, 0.309804, 0.0862745, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.85, 0.55, 0.1, 0.5)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold_btn_hover"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.784314, 0.25098, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 6
+border_color = Color(0.556863, 0.309804, 0.0862745, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(1, 0.65, 0.1, 0.65)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wood"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.556863, 0.309804, 0.145098, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 5
+border_color = Color(0.368627, 0.196078, 0.0862745, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.2, 0.1, 0.04, 0.45)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cream"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.988235, 0.921569, 0.772549, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 6
+border_color = Color(0.603922, 0.352941, 0.172549, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.2, 0.1, 0.04, 0.45)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 28.0
+content_margin_top = 16.0
+content_margin_right = 28.0
+content_margin_bottom = 20.0
+bg_color = Color(0.988235, 0.921569, 0.772549, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 10
+border_color = Color(0.603922, 0.352941, 0.172549, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.15, 0.07, 0.02, 0.5)
+shadow_size = 12
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cell_empty"]
+bg_color = Color(0.905882, 0.823529, 0.65098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.721569, 0.541176, 0.333333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cell_full"]
+bg_color = Color(1, 0.835294, 0.309804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72549, 0.521569, 0.184314, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HUD" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_hud")
+heart_full = ExtResource("4_heart_full")
+heart_empty = ExtResource("5_heart_empty")
+cell_full = SubResource("StyleBoxFlat_cell_full")
+cell_empty = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+
+[node name="TopLeft" type="HBoxContainer" parent="Root"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 418.0
+offset_bottom = 108.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="ScorePanel" type="PanelContainer" parent="Root/TopLeft"]
+custom_minimum_size = Vector2(196, 96)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wood")
+
+[node name="VBox" type="VBoxContainer" parent="Root/TopLeft/ScorePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -9
+alignment = 1
+
+[node name="TitleRow" type="HBoxContainer" parent="Root/TopLeft/ScorePanel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ToastIcon" type="TextureRect" parent="Root/TopLeft/ScorePanel/VBox/TitleRow"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("6_toast_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ModeLabel" type="Label" parent="Root/TopLeft/ScorePanel/VBox/TitleRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.945098, 0.815686, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.141176, 0.0627451, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 19
+text = "KLASİK MOD"
+
+[node name="SubLabel" type="Label" parent="Root/TopLeft/ScorePanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.890196, 0.701961, 1)
+theme_override_font_sizes/font_size = 13
+text = "Toplam Skor"
+horizontal_alignment = 1
+
+[node name="ValueRow" type="HBoxContainer" parent="Root/TopLeft/ScorePanel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="WheatLeft" type="TextureRect" parent="Root/TopLeft/ScorePanel/VBox/ValueRow"]
+custom_minimum_size = Vector2(15, 30)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_wheat")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ScoreValue" type="Label" parent="Root/TopLeft/ScorePanel/VBox/ValueRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.976471, 0.92549, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.141176, 0.0627451, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="WheatRight" type="TextureRect" parent="Root/TopLeft/ScorePanel/VBox/ValueRow"]
+custom_minimum_size = Vector2(15, 30)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_wheat")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="ButterPanel" type="PanelContainer" parent="Root/TopLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(196, 96)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="VBox" type="VBoxContainer" parent="Root/TopLeft/ButterPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -4
+alignment = 1
+
+[node name="Title" type="Label" parent="Root/TopLeft/ButterPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "TEREYAĞI (MAKS 5)"
+horizontal_alignment = 1
+
+[node name="CountRow" type="HBoxContainer" parent="Root/TopLeft/ButterPanel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ButterIcon" type="TextureRect" parent="Root/TopLeft/ButterPanel/VBox/CountRow"]
+custom_minimum_size = Vector2(36, 27)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_butter_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButterCount" type="Label" parent="Root/TopLeft/ButterPanel/VBox/CountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "0 / 5 Katman"
+
+[node name="ButterCells" type="HBoxContainer" parent="Root/TopLeft/ButterPanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Cell1" type="Panel" parent="Root/TopLeft/ButterPanel/VBox/ButterCells"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="Cell2" type="Panel" parent="Root/TopLeft/ButterPanel/VBox/ButterCells"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="Cell3" type="Panel" parent="Root/TopLeft/ButterPanel/VBox/ButterCells"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="Cell4" type="Panel" parent="Root/TopLeft/ButterPanel/VBox/ButterCells"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="Cell5" type="Panel" parent="Root/TopLeft/ButterPanel/VBox/ButterCells"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cell_empty")
+
+[node name="SandwichPanel" type="PanelContainer" parent="Root/TopLeft"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(268, 96)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+script = ExtResource("12_sandwich_hud")
+
+[node name="VBox" type="VBoxContainer" parent="Root/TopLeft/SandwichPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -4
+alignment = 1
+
+[node name="Title" type="Label" parent="Root/TopLeft/SandwichPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SİPARİŞ"
+horizontal_alignment = 1
+
+[node name="SandwichOrderLabel" type="Label" parent="Root/TopLeft/SandwichPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Tereyağı 0 / 1"
+horizontal_alignment = 1
+
+[node name="SandwichClicksLabel" type="Label" parent="Root/TopLeft/SandwichPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 0.309804, 0.145098, 1)
+theme_override_font_sizes/font_size = 14
+text = "KONTROL: 3 / 3"
+horizontal_alignment = 1
+
+[node name="LivesPanel" type="PanelContainer" parent="Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 12.0
+offset_right = 92.0
+offset_bottom = 96.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="VBox" type="VBoxContainer" parent="Root/LivesPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="LivesLabel" type="Label" parent="Root/LivesPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "HAVA HAK: 3 / 3"
+horizontal_alignment = 1
+
+[node name="Hearts" type="HBoxContainer" parent="Root/LivesPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Heart1" type="TextureRect" parent="Root/LivesPanel/VBox/Hearts"]
+custom_minimum_size = Vector2(38, 34)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_heart_full")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="Root/LivesPanel/VBox/Hearts"]
+custom_minimum_size = Vector2(38, 34)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_heart_full")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="Root/LivesPanel/VBox/Hearts"]
+custom_minimum_size = Vector2(38, 34)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_heart_full")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BalancePanel" type="PanelContainer" parent="Root"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -460.0
+offset_top = 12.0
+offset_right = -168.0
+offset_bottom = 96.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="VBox" type="VBoxContainer" parent="Root/BalancePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="HeaderRow" type="HBoxContainer" parent="Root/BalancePanel/VBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Root/BalancePanel/VBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "AĞIRLIK DENGESİ"
+
+[node name="BalanceState" type="Label" parent="Root/BalancePanel/VBox/HeaderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247059, 0.682353, 0.235294, 1)
+theme_override_font_sizes/font_size = 17
+text = "DENGELİ"
+horizontal_alignment = 2
+
+[node name="BalanceMeter" type="Control" parent="Root/BalancePanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_meter")
+
+[node name="MoneyPanel" type="PanelContainer" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 58.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="HBox" type="HBoxContainer" parent="Root/MoneyPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="Root/MoneyPanel/HBox"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyValue" type="Label" parent="Root/MoneyPanel/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.780392, 0.447059, 0.0980392, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="ShopButton" type="Button" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = 104.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "🎪 DÜKKÂN"
+
+[node name="AirBoostPanel" type="PanelContainer" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -140.0
+offset_right = -16.0
+offset_bottom = -102.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="AirBoostLabel" type="Label" parent="Root/AirBoostPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.352941, 0.180392, 0.0705882, 1)
+theme_override_font_sizes/font_size = 15
+text = "Hava Boost (Space): 0 / 0"
+horizontal_alignment = 1
+
+[node name="SellButton" type="Button" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -180.0
+offset_right = 160.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.352941, 0.145098, 0.0392157, 1)
+theme_override_colors/font_outline_color = Color(1, 0.941176, 0.745098, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_gold_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gold_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gold_btn")
+text = "Tostu Sat (+0 🪙)"
+
+[node name="ControlsPanel" type="PanelContainer" parent="Root"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -94.0
+offset_right = -16.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cream")
+
+[node name="HBox" type="HBoxContainer" parent="Root/ControlsPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MouseIcon" type="TextureRect" parent="Root/ControlsPanel/HBox"]
+custom_minimum_size = Vector2(32, 44)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_mouse_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lines" type="VBoxContainer" parent="Root/ControlsPanel/HBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -6
+alignment = 1
+
+[node name="LeftClick" type="Label" parent="Root/ControlsPanel/HBox/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Sol tık: Fırlat / Sola döndür"
+
+[node name="RightClick" type="Label" parent="Root/ControlsPanel/HBox/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Sağ tık: Sağa döndür"
+
+[node name="ResultLabel" type="Label" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+offset_top = 122.0
+offset_bottom = 176.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.952941, 0.690196, 1)
+theme_override_colors/font_outline_color = Color(0.184314, 0.419608, 0.121569, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 34
+text = "KAZANDIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverPanel" type="Control" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Root/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.180392, 0.0784314, 0.0196078, 0.45)
+
+[node name="GameOverCard" type="PanelContainer" parent="Root/GameOverPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -140.0
+offset_right = 210.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Root/GameOverPanel/GameOverCard"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Title" type="Label" parent="Root/GameOverPanel/GameOverCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 0.164706, 0.117647, 1)
+theme_override_font_sizes/font_size = 40
+text = "OYUN BİTTİ"
+horizontal_alignment = 1
+
+[node name="Reason" type="Label" parent="Root/GameOverPanel/GameOverCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.466667, 0.262745, 0.133333, 1)
+theme_override_font_sizes/font_size = 15
+text = "Tereyağı üç kez yere yapıştı!"
+horizontal_alignment = 1
+
+[node name="FinalScore" type="Label" parent="Root/GameOverPanel/GameOverCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Skor: 0"
+horizontal_alignment = 1
+
+[node name="FinalBest" type="Label" parent="Root/GameOverPanel/GameOverCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.603922, 0.352941, 0.172549, 1)
+theme_override_font_sizes/font_size = 20
+text = "Rekor: 0"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Root/GameOverPanel/GameOverCard/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Root/GameOverPanel/GameOverCard/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="Root/GameOverPanel/GameOverCard/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tekrar Oyna"
+
+[node name="MenuButton" type="Button" parent="Root/GameOverPanel/GameOverCard/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ana Menü"

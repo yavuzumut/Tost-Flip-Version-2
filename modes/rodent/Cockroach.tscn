@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/modes/rodent/backgrounds/Cozy Moonlit Kitchen Game Scene.png" id="1_kitchen"]
+
+[node name="Cockroach" type="Sprite2D"]
+position = Vector2(1058, 396)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("1_kitchen")
+region_enabled = true
+region_rect = Rect2(1460, 520, 150, 110)

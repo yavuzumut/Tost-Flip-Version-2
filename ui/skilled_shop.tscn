@@ -1,0 +1,621 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/skilled_shop.gd" id="1_shop"]
+[ext_resource type="Theme" path="res://ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/skilled/bread_upgrade.png" id="3_bread"]
+[ext_resource type="Texture2D" path="res://assets/skilled/butter_upgrade.png" id="4_butter"]
+[ext_resource type="Texture2D" path="res://assets/skilled/air_boost_upgrade.png" id="5_air"]
+[ext_resource type="Texture2D" path="res://assets/skilled/coin.png" id="6_coin"]
+[ext_resource type="Texture2D" path="res://assets/ui/wheat.svg" id="8_wheat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shop_panel"]
+content_margin_left = 26.0
+content_margin_top = 22.0
+content_margin_right = 26.0
+content_margin_bottom = 22.0
+bg_color = Color(0.992157, 0.945098, 0.835294, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 8
+border_color = Color(0.521569, 0.282353, 0.101961, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.12, 0.05, 0.01, 0.55)
+shadow_size = 18
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_currency_badge"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.42, 0.22, 0.08, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.95, 0.78, 0.35, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_divider"]
+color = Color(0.78, 0.58, 0.38, 0.6)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upgrade_card"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.976471, 0.913725, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.768627, 0.556863, 0.341176, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.2, 0.1, 0.02, 0.08)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dot_placeholder"]
+bg_color = Color(0.25, 0.72, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.643137, 0.380392, 0.160784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 6
+border_color = Color(0.380392, 0.188235, 0.0588235, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.18, 0.08, 0.02, 0.35)
+shadow_size = 3
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.741176, 0.458824, 0.2, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 6
+border_color = Color(0.439216, 0.219608, 0.0784314, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.18, 0.08, 0.02, 0.45)
+shadow_size = 5
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 16.0
+content_margin_top = 11.0
+content_margin_right = 16.0
+content_margin_bottom = 7.0
+bg_color = Color(0.521569, 0.282353, 0.109804, 1)
+border_width_left = 3
+border_width_top = 5
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.321569, 0.14902, 0.0470588, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.18, 0.08, 0.02, 0.2)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_disabled"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.58, 0.5, 0.44, 0.65)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.4, 0.33, 0.28, 0.65)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_normal"]
+content_margin_left = 32.0
+content_margin_top = 10.0
+content_margin_right = 32.0
+content_margin_bottom = 14.0
+bg_color = Color(0.662745, 0.396078, 0.168627, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.380392, 0.188235, 0.0588235, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.18, 0.08, 0.02, 0.4)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_hover"]
+content_margin_left = 32.0
+content_margin_top = 10.0
+content_margin_right = 32.0
+content_margin_bottom = 14.0
+bg_color = Color(0.760784, 0.478431, 0.219608, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.439216, 0.219608, 0.0784314, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.18, 0.08, 0.02, 0.5)
+shadow_size = 8
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_pressed"]
+content_margin_left = 32.0
+content_margin_top = 14.0
+content_margin_right = 32.0
+content_margin_bottom = 10.0
+bg_color = Color(0.521569, 0.282353, 0.109804, 1)
+border_width_left = 4
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 5
+border_color = Color(0.321569, 0.14902, 0.0470588, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.18, 0.08, 0.02, 0.25)
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+
+[node name="SkilledShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_shop")
+
+[node name="BackgroundOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.06, 0.02, 0.65)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopPanel" type="PanelContainer" parent="Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(660, 520)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_shop_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Center/ShopPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Center/ShopPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ShopTitle" type="HBoxContainer" parent="Center/ShopPanel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="WheatLeft" type="TextureRect" parent="Center/ShopPanel/VBox/Header/ShopTitle"]
+custom_minimum_size = Vector2(18, 30)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_wheat")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="Center/ShopPanel/VBox/Header/ShopTitle"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.419608, 0.203922, 0.0705882, 1)
+theme_override_font_sizes/font_size = 28
+text = "USTA ŞEF'İN DÜKKÂNI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WheatRight" type="TextureRect" parent="Center/ShopPanel/VBox/Header/ShopTitle"]
+custom_minimum_size = Vector2(18, 30)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_wheat")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="CurrencyDisplay" type="PanelContainer" parent="Center/ShopPanel/VBox/Header"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_currency_badge")
+
+[node name="CurrencyHBox" type="HBoxContainer" parent="Center/ShopPanel/VBox/Header/CurrencyDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="Center/ShopPanel/VBox/Header/CurrencyDisplay/CurrencyHBox"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShopMoneyLabel" type="Label" parent="Center/ShopPanel/VBox/Header/CurrencyDisplay/CurrencyHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Center/ShopPanel/VBox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_divider")
+
+[node name="UpgradeList" type="VBoxContainer" parent="Center/ShopPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BreadUpgrade" type="PanelContainer" parent="Center/ShopPanel/VBox/UpgradeList"]
+custom_minimum_size = Vector2(600, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_upgrade_card")
+
+[node name="CardContent" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="UpgradeIcon" type="TextureRect" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_bread")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Information" type="VBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="TopRow" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information"]
+layout_mode = 2
+
+[node name="UpgradeName" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.380392, 0.172549, 0.054902, 1)
+theme_override_font_sizes/font_size = 19
+text = "Ekmek Geliştirmesi"
+
+[node name="BreadLevelLabel" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.552941, 0.329412, 0.145098, 1)
+theme_override_font_sizes/font_size = 15
+text = "Seviye 1 / 5"
+
+[node name="BreadDots" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="D1" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/BreadDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D2" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/BreadDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D3" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/BreadDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D4" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/BreadDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D5" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information/BreadDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="BreadDesc" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.482353, 0.282353, 0.12549, 1)
+theme_override_font_sizes/font_size = 13
+text = "Maksimum katman: 3 -> 4"
+
+[node name="BreadUpgradeBtn" type="Button" parent="Center/ShopPanel/VBox/UpgradeList/BreadUpgrade/CardContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(136, 48)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.941176, 0.784314, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_disabled_color = Color(0.85, 0.8, 0.75, 0.7)
+theme_override_colors/font_outline_color = Color(0.352941, 0.160784, 0.0588235, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 19
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "250 🪙"
+
+[node name="ButterUpgrade" type="PanelContainer" parent="Center/ShopPanel/VBox/UpgradeList"]
+custom_minimum_size = Vector2(600, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_upgrade_card")
+
+[node name="CardContent" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="UpgradeIcon" type="TextureRect" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_butter")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Information" type="VBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="TopRow" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information"]
+layout_mode = 2
+
+[node name="UpgradeName" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.380392, 0.172549, 0.054902, 1)
+theme_override_font_sizes/font_size = 19
+text = "Tereyağı Kalitesi"
+
+[node name="ButterLevelLabel" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.552941, 0.329412, 0.145098, 1)
+theme_override_font_sizes/font_size = 15
+text = "Seviye 1 / 5"
+
+[node name="ButterDots" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="D1" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/ButterDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D2" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/ButterDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D3" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/ButterDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D4" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/ButterDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D5" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information/ButterDots"]
+custom_minimum_size = Vector2(18, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="ButterDesc" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.482353, 0.282353, 0.12549, 1)
+theme_override_font_sizes/font_size = 13
+text = "Satış çarpanı: x1.0 -> x1.3"
+
+[node name="ButterUpgradeBtn" type="Button" parent="Center/ShopPanel/VBox/UpgradeList/ButterUpgrade/CardContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(136, 48)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.941176, 0.784314, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_disabled_color = Color(0.85, 0.8, 0.75, 0.7)
+theme_override_colors/font_outline_color = Color(0.352941, 0.160784, 0.0588235, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 19
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "300 🪙"
+
+[node name="AirUpgrade" type="PanelContainer" parent="Center/ShopPanel/VBox/UpgradeList"]
+custom_minimum_size = Vector2(600, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_upgrade_card")
+
+[node name="CardContent" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="UpgradeIcon" type="TextureRect" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_air")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Information" type="VBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="TopRow" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information"]
+layout_mode = 2
+
+[node name="UpgradeName" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.380392, 0.172549, 0.054902, 1)
+theme_override_font_sizes/font_size = 19
+text = "Hava Takviyesi"
+
+[node name="AirLevelLabel" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.552941, 0.329412, 0.145098, 1)
+theme_override_font_sizes/font_size = 15
+text = "Seviye 0 / 2"
+
+[node name="AirDots" type="HBoxContainer" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="D1" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information/AirDots"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="D2" type="Panel" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information/AirDots"]
+custom_minimum_size = Vector2(24, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dot_placeholder")
+
+[node name="AirDesc" type="Label" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent/Information"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.482353, 0.282353, 0.12549, 1)
+theme_override_font_sizes/font_size = 13
+text = "Havada ekstra takviye: 0 -> 1 hak"
+
+[node name="AirUpgradeBtn" type="Button" parent="Center/ShopPanel/VBox/UpgradeList/AirUpgrade/CardContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(136, 48)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.941176, 0.784314, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_disabled_color = Color(0.85, 0.8, 0.75, 0.7)
+theme_override_colors/font_outline_color = Color(0.352941, 0.160784, 0.0588235, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 19
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+text = "600 🪙"
+
+[node name="CloseCenter" type="CenterContainer" parent="Center/ShopPanel/VBox"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Center/ShopPanel/VBox/CloseCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 56)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.94902, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0.352941, 0.160784, 0.0588235, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 26
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_close_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_close_normal")
+text = "KAPAT"

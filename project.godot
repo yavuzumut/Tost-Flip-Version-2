@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Tost-Flip"
+config/name="Tost Flip Version 2"
 run/main_scene="uid://cvj66rukls6u0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

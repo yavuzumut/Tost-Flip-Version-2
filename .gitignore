@@ -1,3 +1,36 @@
-# Godot 4+ specific ignores
+# Godot generated cache and imports
 .godot/
 /android/
+
+# Local exports and build output
+/export.cfg
+/export_presets.cfg
+/build/
+/dist/
+
+# Local backups and temporary files
+*.bak
+*.tmp
+*.temp
+*.autosave
+*.swp
+*~
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local environment values and signing credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+
+# Local scene snapshots
+*_backup_*.tscn
+*_before_*.tscn

@@ -1,0 +1,916 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/mode_select_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://ui/hud_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/modes/card_classic.png" id="3_classic"]
+[ext_resource type="Texture2D" path="res://assets/modes/card_chef.png" id="4_chef"]
+[ext_resource type="Texture2D" path="res://assets/modes/card_sandwich.png" id="5_sandwich"]
+[ext_resource type="Texture2D" path="res://assets/modes/card_chaos.png" id="6_chaos"]
+[ext_resource type="Texture2D" path="res://assets/modes/card_space.png" id="7_space"]
+[ext_resource type="Texture2D" path="res://assets/Toasty_Tost_Flip_Logo-removebg-preview.png" id="8_logo"]
+[ext_resource type="Texture2D" path="res://assets/gameplay/kitchen_back.png" id="9_kitchen"]
+[ext_resource type="Texture2D" path="res://assets/gameplay/table.png" id="10_table"]
+[ext_resource type="Texture2D" path="res://assets/ui/wheat.svg" id="11_wheat"]
+[ext_resource type="Texture2D" path="res://assets/ui/toast_icon.svg" id="12_toast"]
+[ext_resource type="Texture2D" path="res://assets/collection_lock.svg" id="13_lock"]
+[ext_resource type="Texture2D" path="res://assets/ui/mode_select/icon_arrow_left.svg" id="14_arrow_l"]
+[ext_resource type="Texture2D" path="res://assets/ui/mode_select/icon_arrow_right.svg" id="15_arrow_r"]
+[ext_resource type="Texture2D" path="res://assets/ui/mode_select/icon_play.svg" id="16_play"]
+
+[ext_resource type="Texture2D" path="res://assets/wood_button.png" id="17_wood_button"]
+
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.25, 0.1, 0.02, 0, 0.25, 0.1, 0.02, 0.05, 0.2, 0.07, 0.01, 0.5)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+width = 256
+height = 144
+fill = 1
+fill_from = Vector2(0.5, 0.48)
+fill_to = Vector2(1.08, 1.12)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title"]
+content_margin_left = 18.0
+content_margin_top = 0.0
+content_margin_right = 18.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.95, 0.82, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.556863, 0.301961, 0.117647, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.15, 0.06, 0.01, 0.35)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 5.0
+bg_color = Color(0.341176, 0.168627, 0.0627451, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.87, 0.6, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.1, 0.04, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_normal"]
+content_margin_left = 20.0
+content_margin_top = 4.0
+content_margin_right = 28.0
+content_margin_bottom = 8.0
+bg_color = Color(0.992157, 0.92549, 0.776471, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.517647, 0.278431, 0.0980392, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.12, 0.05, 0, 0.35)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_hover"]
+content_margin_left = 20.0
+content_margin_top = 4.0
+content_margin_right = 28.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.968627, 0.874510, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.517647, 0.278431, 0.0980392, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(1, 0.8, 0.35, 0.45)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_pressed"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 28.0
+content_margin_bottom = 4.0
+bg_color = Color(0.937255, 0.835294, 0.643137, 1)
+border_width_left = 4
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.517647, 0.278431, 0.0980392, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.12, 0.05, 0, 0.3)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play_normal"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_right = 30.0
+content_margin_bottom = 8.0
+bg_color = Color(0.360784, 0.741176, 0.215686, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.156863, 0.415686, 0.0941176, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+shadow_color = Color(0.08, 0.15, 0, 0.4)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play_hover"]
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_right = 30.0
+content_margin_bottom = 8.0
+bg_color = Color(0.435294, 0.831373, 0.278431, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 8
+border_color = Color(0.156863, 0.415686, 0.0941176, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+shadow_color = Color(0.75, 1, 0.4, 0.45)
+shadow_size = 12
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play_pressed"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 30.0
+content_margin_bottom = 4.0
+bg_color = Color(0.301961, 0.643137, 0.176471, 1)
+border_width_left = 4
+border_width_top = 6
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.156863, 0.415686, 0.0941176, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+shadow_color = Color(0.08, 0.15, 0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_page_normal"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.992157, 0.92549, 0.776471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.517647, 0.278431, 0.0980392, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.12, 0.05, 0, 0.3)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_page_hover"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.968627, 0.87451, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.517647, 0.278431, 0.0980392, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(1, 0.8, 0.35, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_main_normal"]
+content_margin_left = 20.0
+content_margin_top = 0.0
+content_margin_right = 90.0
+texture = ExtResource("17_wood_button")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_main_pressed"]
+content_margin_left = 20.0
+content_margin_top = 0.0
+content_margin_right = 90.0
+texture = ExtResource("17_wood_button")
+modulate_color = Color(0.7137255, 0.5411765, 0.39215687, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_main_hover_pressed"]
+content_margin_left = 20.0
+content_margin_top = 0.0
+content_margin_right = 90.0
+texture = ExtResource("17_wood_button")
+modulate_color = Color(0.7137255, 0.5411765, 0.39215687, 1)
+
+[node name="ModeSelectMenu" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 4
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="Background" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+ratio = 1.7778
+stretch_mode = 3
+
+[node name="Kitchen" type="Control" parent="Background"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="KitchenBack" type="TextureRect" parent="Background/Kitchen"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.7545
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_kitchen")
+expand_mode = 1
+
+[node name="TableFront" type="TextureRect" parent="Background/Kitchen"]
+layout_mode = 1
+anchor_top = 0.7545
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_table")
+expand_mode = 1
+
+[node name="Vignette" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+
+[node name="Header" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 4.0
+offset_right = 220.0
+offset_bottom = 132.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = -14
+
+[node name="LogoHolder" type="Control" parent="Header"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LogoShadow" type="TextureRect" parent="Header/LogoHolder"]
+modulate = Color(0.16, 0.06, 0.01, 0.4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Logo" type="TextureRect" parent="Header/LogoHolder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleCenter" type="CenterContainer" parent="Header"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="PanelContainer" parent="Header/TitleCenter"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_title")
+
+[node name="TitleRow" type="HBoxContainer" parent="Header/TitleCenter/Title"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="WheatLeft" type="TextureRect" parent="Header/TitleCenter/Title/TitleRow"]
+custom_minimum_size = Vector2(18, 34)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("11_wheat")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="Header/TitleCenter/Title/TitleRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.419608, 0.203922, 0.0705882, 1)
+theme_override_font_sizes/font_size = 28
+text = "Oyun Modları"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WheatRight" type="TextureRect" parent="Header/TitleCenter/Title/TitleRow"]
+custom_minimum_size = Vector2(18, 34)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("11_wheat")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="CardsArea" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 138.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Page1" type="HBoxContainer" parent="CardsArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="CardClassic" type="TextureButton" parent="CardsArea/Page1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(274, 411)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_classic")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CardsArea/Page1/CardClassic"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_classic")
+expand_mode = 1
+
+[node name="Glow" type="TextureRect" parent="CardsArea/Page1/CardClassic"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_classic")
+expand_mode = 1
+
+[node name="CardChef" type="TextureButton" parent="CardsArea/Page1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(274, 411)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_chef")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CardsArea/Page1/CardChef"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_chef")
+expand_mode = 1
+
+[node name="Glow" type="TextureRect" parent="CardsArea/Page1/CardChef"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_chef")
+expand_mode = 1
+
+[node name="Page2" type="HBoxContainer" parent="CardsArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 44
+alignment = 1
+
+[node name="CardSandwich" type="TextureButton" parent="CardsArea/Page2"]
+unique_name_in_owner = true
+self_modulate = Color(0.78, 0.72, 0.66, 1)
+custom_minimum_size = Vector2(246, 369)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+texture_normal = ExtResource("5_sandwich")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CardsArea/Page2/CardSandwich"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_sandwich")
+expand_mode = 1
+
+[node name="Glow" type="TextureRect" parent="CardsArea/Page2/CardSandwich"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_sandwich")
+expand_mode = 1
+
+[node name="LockBadge" type="PanelContainer" parent="CardsArea/Page2/CardSandwich"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.33
+anchor_right = 0.5
+anchor_bottom = 0.33
+offset_left = -72.0
+offset_top = -22.0
+offset_right = 72.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="Row" type="HBoxContainer" parent="CardsArea/Page2/CardSandwich/LockBadge"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="CardsArea/Page2/CardSandwich/LockBadge/Row"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LockLabel" type="Label" parent="CardsArea/Page2/CardSandwich/LockBadge/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.72, 1)
+theme_override_font_sizes/font_size = 20
+text = "YAKINDA"
+vertical_alignment = 1
+
+[node name="CardChaos" type="TextureButton" parent="CardsArea/Page2"]
+unique_name_in_owner = true
+self_modulate = Color(0.78, 0.72, 0.66, 1)
+custom_minimum_size = Vector2(246, 369)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+texture_normal = ExtResource("6_chaos")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CardsArea/Page2/CardChaos"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_chaos")
+expand_mode = 1
+
+[node name="Glow" type="TextureRect" parent="CardsArea/Page2/CardChaos"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_chaos")
+expand_mode = 1
+
+[node name="LockBadge" type="PanelContainer" parent="CardsArea/Page2/CardChaos"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.33
+anchor_right = 0.5
+anchor_bottom = 0.33
+offset_left = -72.0
+offset_top = -22.0
+offset_right = 72.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="Row" type="HBoxContainer" parent="CardsArea/Page2/CardChaos/LockBadge"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="CardsArea/Page2/CardChaos/LockBadge/Row"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LockLabel" type="Label" parent="CardsArea/Page2/CardChaos/LockBadge/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.72, 1)
+theme_override_font_sizes/font_size = 20
+text = "YAKINDA"
+vertical_alignment = 1
+
+[node name="CardSpace" type="TextureButton" parent="CardsArea/Page2"]
+unique_name_in_owner = true
+self_modulate = Color(0.78, 0.72, 0.66, 1)
+custom_minimum_size = Vector2(246, 369)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+texture_normal = ExtResource("7_space")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CardsArea/Page2/CardSpace"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_space")
+expand_mode = 1
+
+[node name="Glow" type="TextureRect" parent="CardsArea/Page2/CardSpace"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_space")
+expand_mode = 1
+
+[node name="LockBadge" type="PanelContainer" parent="CardsArea/Page2/CardSpace"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.33
+anchor_right = 0.5
+anchor_bottom = 0.33
+offset_left = -72.0
+offset_top = -22.0
+offset_right = 72.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="Row" type="HBoxContainer" parent="CardsArea/Page2/CardSpace/LockBadge"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="CardsArea/Page2/CardSpace/LockBadge/Row"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LockLabel" type="Label" parent="CardsArea/Page2/CardSpace/LockBadge/Row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.72, 1)
+theme_override_font_sizes/font_size = 20
+text = "YAKINDA"
+vertical_alignment = 1
+
+[node name="Pagination" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -70.0
+offset_right = 120.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="PrevPage" type="Button" parent="Pagination"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/icon_max_width = 22
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_page_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_page_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_page_normal")
+theme_override_styles/normal = SubResource("StyleBoxFlat_page_normal")
+icon = ExtResource("14_arrow_l")
+icon_alignment = 1
+
+[node name="PageDot1" type="TextureButton" parent="Pagination"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_toast")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PageDot2" type="TextureButton" parent="Pagination"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_toast")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="NextPage" type="Button" parent="Pagination"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/icon_max_width = 22
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_page_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_page_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_page_normal")
+theme_override_styles/normal = SubResource("StyleBoxFlat_page_normal")
+icon = ExtResource("15_arrow_r")
+icon_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -86.0
+offset_right = 212.0
+offset_bottom = -22.0
+grow_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.356863, 0.172549, 0.0588235, 1)
+theme_override_colors/font_pressed_color = Color(0.356863, 0.172549, 0.0588235, 1)
+theme_override_colors/font_focus_color = Color(0.356863, 0.172549, 0.0588235, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.356863, 0.172549, 0.0588235, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/h_separation = 12
+theme_override_constants/icon_max_width = 30
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/hover = SubResource("StyleBoxTexture_main_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_main_pressed")
+theme_override_styles/normal = SubResource("StyleBoxTexture_main_normal")
+text = "Geri"
+icon = ExtResource("14_arrow_l")
+theme_override_colors/font_outline_color = Color(0.2901961, 0.14509805, 0.05882353, 1)
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_main_hover_pressed")
+[node name="PlayButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -90.0
+offset_right = -28.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_focus_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_focus_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_focus_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_focus_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_hover_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_focus_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.30, 0.14, 0.04, 1)
+theme_override_colors/font_outline_color = Color(0.2901961, 0.14509805, 0.05882353, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/h_separation = 12
+theme_override_constants/icon_max_width = 34
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+theme_override_styles/hover = SubResource("StyleBoxTexture_main_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_main_pressed")
+theme_override_styles/normal = SubResource("StyleBoxTexture_main_normal")
+text = "Oyna"
+icon = ExtResource("16_play")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_main_hover_pressed")

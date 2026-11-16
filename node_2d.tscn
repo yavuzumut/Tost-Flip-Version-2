@@ -2,19 +2,34 @@
 
 [ext_resource type="Script" uid="uid://cq1srayv53plc" path="res://toast.gd" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://cervf1gmu2mko" path="res://node_2d.gd" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://5v03s3s146mb" path="res://icon.svg" id="1_wtcfe"]
-[ext_resource type="Texture2D" uid="uid://cg5u5mpledmep" path="res://assets/kitchen_bg.png" id="2_0hol4"]
 [ext_resource type="Texture2D" uid="uid://b7yr4a5bbwl72" path="res://assets/menu_bg.png" id="2_rj586"]
 [ext_resource type="Texture2D" uid="uid://b76223m78bvn6" path="res://assets/toast_butter.png" id="4_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://cmfecfmc5kryr" path="res://assets/wood_button.png" id="6_kdubu"]
 [ext_resource type="Texture2D" uid="uid://ds84w6k6cgw0x" path="res://assets/high_score_note.png" id="7_d21ai"]
 [ext_resource type="Texture2D" uid="uid://c4phve770ousw" path="res://assets/Toasty_Tost_Flip_Logo-removebg-preview.png" id="9_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://d3frmtef2vhss" path="res://assets/collection_ui/tost_flip_koleksiyon_arka_plan_soltost_1920x1080.png" id="10_x0ka3"]
+[ext_resource type="Script" uid="uid://ush7ygnqehj0" path="res://gameplay/cover_camera.gd" id="ext_cover_camera"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="ext_hud"]
+[ext_resource type="Texture2D" uid="uid://ck1caivktkvdj" path="res://assets/gameplay/kitchen_back.png" id="ext_kitchen_back"]
+[ext_resource type="PackedScene" path="res://ui/mode_select_menu.tscn" id="ext_mode_menu"]
+[ext_resource type="Texture2D" uid="uid://bwd2st181b7nb" path="res://assets/gameplay/plate.png" id="ext_plate"]
+[ext_resource type="PackedScene" path="res://ui/skilled_shop.tscn" id="ext_shop"]
+[ext_resource type="Texture2D" uid="uid://hcimr5nawq8j" path="res://assets/gameplay/table.png" id="ext_table"]
+[ext_resource type="Script" uid="uid://dc8ud8p6w66t4" path="res://gameplay/toast_shadow.gd" id="ext_toast_shadow"]
+[ext_resource type="Script" path="res://gameplay/rodent_visuals.gd" id="ext_rodent_visuals"]
+[ext_resource type="PackedScene" path="res://scenes/space/space_world.tscn" id="ext_space_world"]
+[ext_resource type="PackedScene" path="res://scenes/space/space_hud.tscn" id="ext_space_hud"]
+[ext_resource type="Texture2D" uid="uid://brm8j40pysb2k" path="res://assets/collection_ui/collection_card.png" id="tf_collection_v2_card"]
+[ext_resource type="Texture2D" uid="uid://bbj4l1narssw2" path="res://assets/collection_ui/locked_toast.png" id="tf_collection_v2_lock"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_table"]
+size = Vector2(1300, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plate"]
+size = Vector2(360, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lwn1"]
 size = Vector2(125, 122)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlonp"]
-size = Vector2(1000, 40)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rj586"]
 content_margin_left = 20.0
@@ -36,6 +51,8 @@ content_margin_right = 90.0
 texture = ExtResource("6_kdubu")
 modulate_color = Color(0.7137255, 0.5411765, 0.39215687, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0h7mo"]
+
 [node name="Node2D" type="Node2D" unique_id=1307170826]
 script = ExtResource("1_epypp")
 
@@ -45,36 +62,76 @@ position = Vector2(573, 326.75)
 scale = Vector2(0.6997608, 0.7104144)
 texture = ExtResource("2_rj586")
 
-[node name="KitchenBG" type="Sprite2D" parent="." unique_id=855506445]
-z_index = -10
-position = Vector2(576, 324)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("2_0hol4")
+[node name="GameplayArea" type="Node2D" parent="." unique_id=101010101]
+visible = false
 
-[node name="Toast" type="RigidBody2D" parent="." unique_id=1940843385]
-position = Vector2(550, 150)
+[node name="Background" type="Sprite2D" parent="GameplayArea" unique_id=101010102]
+z_index = -10
+position = Vector2(576, 244)
+scale = Vector2(0.8372093, 0.8372093)
+texture = ExtResource("ext_kitchen_back")
+
+[node name="CoverCamera" type="Camera2D" parent="GameplayArea" unique_id=101010103]
+position = Vector2(576, 324)
+script = ExtResource("ext_cover_camera")
+
+[node name="Table" type="StaticBody2D" parent="GameplayArea" unique_id=101010104]
+position = Vector2(576, 563)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameplayArea/Table" unique_id=101010105]
+scale = Vector2(0.8372093, 0.8372093)
+texture = ExtResource("ext_table")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameplayArea/Table" unique_id=101010106]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_table")
+
+[node name="Plate" type="StaticBody2D" parent="GameplayArea" unique_id=101010107]
+position = Vector2(576, 546)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameplayArea/Plate" unique_id=101010108]
+scale = Vector2(0.8372093, 0.8372093)
+texture = ExtResource("ext_plate")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameplayArea/Plate" unique_id=101010109]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_plate")
+
+[node name="IngredientStations" type="Node2D" parent="GameplayArea" unique_id=101010111]
+visible = false
+
+[node name="ToastShadow" type="Sprite2D" parent="GameplayArea" unique_id=101010110]
+modulate = Color(0, 0, 0, 0.35)
+position = Vector2(576, 546)
+scale = Vector2(0.24, 0.08)
+texture = ExtResource("4_q6r6c")
+script = ExtResource("ext_toast_shadow")
+toast_path = NodePath("../Toast")
+surface_y = 546.0
+
+[node name="Toast" type="RigidBody2D" parent="GameplayArea" unique_id=1940843385]
+position = Vector2(576, 450)
 script = ExtResource("1_0e48y")
 
-[node name="Sprite2D" type="Sprite2D" parent="Toast" unique_id=237596363]
+[node name="Sprite2D" type="Sprite2D" parent="GameplayArea/Toast" unique_id=237596363]
 scale = Vector2(0.28, 0.28)
 texture = ExtResource("4_q6r6c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Toast" unique_id=559185884]
-rotation = -1.288053
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameplayArea/Toast" unique_id=559185884]
 shape = SubResource("RectangleShape2D_7lwn1")
 
-[node name="Icon" type="Sprite2D" parent="Toast" unique_id=1067348664]
+[node name="SpaceWorld" parent="GameplayArea" instance=ExtResource("ext_space_world")]
 visible = false
-position = Vector2(-75, -127)
-scale = Vector2(1.0078125, 0.9785156)
-texture = ExtResource("1_wtcfe")
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=1734078658]
-position = Vector2(550, 550)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=64355353]
+[node name="RodentVisuals" type="Node2D" parent="GameplayArea"]
 visible = false
-shape = SubResource("RectangleShape2D_wlonp")
+script = ExtResource("ext_rodent_visuals")
+
+[node name="HUD" parent="." unique_id=65521112 instance=ExtResource("ext_hud")]
+visible = false
+
+[node name="SpaceHUD" parent="HUD" instance=ExtResource("ext_space_hud")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=880824027]
 
@@ -83,6 +140,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -201,15 +259,378 @@ stretch_mode = 5
 [node name="CollectionMenu" type="Control" parent="CanvasLayer" unique_id=1912580706]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BackButton" type="Button" parent="CanvasLayer/CollectionMenu" unique_id=400923317]
+[node name="CollectionHeaderText" type="Label" parent="CanvasLayer/CollectionMenu" unique_id=2046367151]
+visible = false
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Geri"
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_outline_color = Color(0.2901961, 0.14509805, 0.05882353, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 38
+text = "KOLEKSİYON"
+horizontal_alignment = 1
+
+[node name="CollectionTitle" type="TextureRect" parent="CanvasLayer/CollectionMenu" unique_id=1896511086]
+visible = false
+layout_mode = 0
+offset_left = 360.0
+offset_top = 129.0
+offset_right = 792.0
+offset_bottom = 218.0
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_0h7mo")
+expand_mode = 1
+
+[node name="BackdropShade" type="ColorRect" parent="CanvasLayer/CollectionMenu" unique_id=1070682322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2, 0.1, 0.05, 0.17)
+
+[node name="CollectionBoard" type="TextureRect" parent="CanvasLayer/CollectionMenu" unique_id=1001835069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_x0ka3")
+expand_mode = 1
+
+[node name="CollectionLogo" type="TextureRect" parent="CanvasLayer/CollectionMenu" unique_id=2043654428]
+visible = false
+layout_mode = 0
+offset_left = 382.0
+offset_right = 770.0
+offset_bottom = 120.0
+mouse_filter = 2
+texture = ExtResource("9_4d7sh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardsContainer" type="HBoxContainer" parent="CanvasLayer/CollectionMenu" unique_id=2042572506]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 242.0
+offset_right = 1012.0
+offset_bottom = 534.0
+mouse_filter = 2
+theme_override_constants/separation = 13
+
+[node name="ButterCard" type="Control" parent="CanvasLayer/CollectionMenu/CardsContainer" unique_id=93362760]
+custom_minimum_size = Vector2(208, 292)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PaperFrame" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/ButterCard" unique_id=383682856]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 292.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_card")
+expand_mode = 1
+
+[node name="ToastArt" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/ButterCard" unique_id=868009427]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 40.0
+offset_right = 183.0
+offset_bottom = 189.0
+mouse_filter = 2
+texture = ExtResource("4_q6r6c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/ButterCard" unique_id=151673661]
+custom_minimum_size = Vector2(196, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 211.0
+offset_right = 202.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.34509805, 0.19215687, 0.11764706, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Tereyağlı Tost"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardInfo" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/ButterCard" unique_id=1508830742]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 238.0
+offset_right = 203.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(0.46666667, 0.2627451, 0.13333333, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "Dengeli  •  Orta dönüş"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardDetail" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/ButterCard" unique_id=936597251]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 257.0
+offset_right = 201.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(0.46666667, 0.2627451, 0.13333333, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "Klasik başlangıç!
+Dengeli ve güvenilir."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="JamCard" type="Control" parent="CanvasLayer/CollectionMenu/CardsContainer" unique_id=1370932727]
+custom_minimum_size = Vector2(208, 292)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PaperFrame" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/JamCard" unique_id=1754791036]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 292.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_card")
+expand_mode = 1
+
+[node name="ToastArt" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/JamCard" unique_id=871731579]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 40.0
+offset_right = 183.0
+offset_bottom = 189.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/JamCard" unique_id=1882589807]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 211.0
+offset_right = 202.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.34509805, 0.19215687, 0.11764706, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Reçelli Tost"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UnlockGoal" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/JamCard" unique_id=1588616283]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 238.0
+offset_right = 200.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.46666667, 0.2627451, 0.13333333, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "5 puana ulaşarak
+kilidini aç!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardDetail" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/JamCard" unique_id=1293530535]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 268.0
+offset_right = 200.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(0.6392157, 0.2901961, 0.14901961, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "Daha hızlı!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SausageCard" type="Control" parent="CanvasLayer/CollectionMenu/CardsContainer" unique_id=713738770]
+custom_minimum_size = Vector2(208, 292)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PaperFrame" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/SausageCard" unique_id=350993605]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 292.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_card")
+expand_mode = 1
+
+[node name="ToastArt" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/SausageCard" unique_id=715160268]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 40.0
+offset_right = 183.0
+offset_bottom = 189.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/SausageCard" unique_id=2098720130]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 211.0
+offset_right = 202.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.34509805, 0.19215687, 0.11764706, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Sucuklu Tost"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UnlockGoal" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/SausageCard" unique_id=1974925008]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 238.0
+offset_right = 200.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.46666667, 0.2627451, 0.13333333, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "10 puana ulaşarak
+kilidini aç!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardDetail" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/SausageCard" unique_id=794542805]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 268.0
+offset_right = 200.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(0.6392157, 0.2901961, 0.14901961, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "Daha yavaş!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BombCard" type="Control" parent="CanvasLayer/CollectionMenu/CardsContainer" unique_id=247799105]
+custom_minimum_size = Vector2(208, 292)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PaperFrame" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/BombCard" unique_id=443215557]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 292.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_card")
+expand_mode = 1
+
+[node name="ToastArt" type="TextureRect" parent="CanvasLayer/CollectionMenu/CardsContainer/BombCard" unique_id=955442089]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 40.0
+offset_right = 183.0
+offset_bottom = 189.0
+mouse_filter = 2
+texture = ExtResource("tf_collection_v2_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/BombCard" unique_id=282275457]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 211.0
+offset_right = 202.0
+offset_bottom = 238.0
+theme_override_colors/font_color = Color(0.34509805, 0.19215687, 0.11764706, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Bomba Tost"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UnlockGoal" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/BombCard" unique_id=914067454]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 238.0
+offset_right = 200.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.46666667, 0.2627451, 0.13333333, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "15 puana ulaşarak
+kilidini aç!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardDetail" type="Label" parent="CanvasLayer/CollectionMenu/CardsContainer/BombCard" unique_id=607666432]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 268.0
+offset_right = 200.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(0.6392157, 0.2901961, 0.14901961, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9411765, 0.8117647, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "Bazen hızlı, bazen yavaş!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BackButton" type="Button" parent="CanvasLayer/CollectionMenu" unique_id=811221952]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 548.0
+offset_right = 708.0
+offset_bottom = 632.0
+theme_override_colors/font_color = Color(1, 0.8784314, 0.5411765, 1)
+theme_override_colors/font_outline_color = Color(0.2901961, 0.14509805, 0.05882353, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_rj586")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kdubu")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rj586")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_d21ai")
+text = "GERİ"
+
+[node name="ModeSelectMenu" parent="CanvasLayer" unique_id=1617440576 instance=ExtResource("ext_mode_menu")]
+visible = false
+
+[node name="SkilledShop" parent="CanvasLayer" unique_id=1049357619 instance=ExtResource("ext_shop")]
+visible = false
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MenuButtons/CollectionButton" to="." method="_on_collection_button_pressed"]

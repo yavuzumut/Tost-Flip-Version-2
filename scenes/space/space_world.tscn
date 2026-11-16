@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/space_world.gd" id="1"]
+
+[node name="SpaceWorld" type="Node2D"]
+script = ExtResource("1")
+
+[node name="SpaceBackground" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.063, 0.098, 0.18, 1)
+mouse_filter = 2
+
+[node name="Starfield" type="Node2D" parent="."]
+
+[node name="PlanetContainer" type="Node2D" parent="."]
+
+[node name="SpaceObjectContainer" type="Node2D" parent="."]
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="LandingArea" type="Node2D" parent="."]
+visible = false
