@@ -56,6 +56,7 @@ var _round := 0   # bekleyen restart zamanlayıcılarının eski tura ait olup o
 
 var _best_score_label: Label
 
+var _menu_button: Button
 
 func _ready() -> void:
 	_load_best_score()
@@ -83,11 +84,20 @@ func _ready() -> void:
 	skilled_shop.mode_manager = skilled_mgr
 	skilled_shop.upgraded.connect(_on_shop_upgraded)
 	skilled_shop.closed.connect(_on_shop_closed)
-
+	_create_menu_button()
 	_show_main_menu()
 	_setup_menu_animations()
 	_play_menu_intro()
 
+func _create_menu_button() -> void:
+	_menu_button = Button.new()
+	_menu_button.text = "Ana Menü"
+	_menu_button.focus_mode = Control.FOCUS_NONE
+	_menu_button.position = Vector2(20.0, 180.0)
+	_menu_button.size = Vector2(190.0, 40.0)
+	_menu_button.pressed.connect(_show_main_menu)
+	$CanvasLayer.add_child(_menu_button)
+	_menu_button.hide()
 
 func _ground_top() -> float:
 	return _surface_top(ground)
@@ -262,6 +272,10 @@ func _max_butter_layers() -> int:
 func _unhandled_input(event: InputEvent) -> void:
 	if skilled_shop.visible:
 		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		if state != GameState.MAIN_MENU and state != GameState.MODE_SELECT and state != GameState.COLLECTION:
+			_show_main_menu()
+			return
 	if active_mode == GameMode.SPACE:
 		_handle_space_input(event)
 		return
@@ -304,7 +318,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		GameState.LANDED:
 			# Usta Şef modunda oyuncu tostu satmadan yeni tur için sol tıkla doğrudan fırlatabilir!
 			if active_mode == GameMode.SKILLED and btn == MOUSE_BUTTON_LEFT and lives > 0:
+				_round += 1
+				_pending_sale_reward = 0
 				hud.hide_sell_button()
+				hud.hide_result()
+				toast.reset_to(_start_pos)
+				toast.set_butter_layers(butter_layers)
 				toast.launch()
 				state = GameState.FLYING
 				remaining_air_boosts = skilled_mgr.get_max_air_boosts()
@@ -494,14 +513,20 @@ func _on_sell_pressed() -> void:
 
 func _on_shop_opened() -> void:
 	hud.hide()
+	_menu_button.hide()
 	skilled_shop.refresh()
 	skilled_shop.show()
 
 
 func _on_shop_closed() -> void:
+	_menu_button.show()
 	if state == GameState.READY or state == GameState.FLYING or state == GameState.LANDED:
 		hud.show()
 		_refresh_hud()
+	elif state == GameState.GAME_OVER:
+		hud.show()
+		_refresh_hud()
+		hud.show_game_over(score, best_score)
 
 
 func _on_shop_upgraded(_type: String) -> void:
@@ -517,6 +542,7 @@ func _on_play_button_pressed() -> void:
 	$CanvasLayer/MainMenu.hide()
 	$CanvasLayer/CollectionMenu.hide()
 	skilled_shop.hide()
+	_menu_button.hide()
 	mode_select_menu.show()
 	state = GameState.MODE_SELECT
 
@@ -555,6 +581,7 @@ func start_game(mode: GameMode) -> void:
 	plate.show()
 	toast_shadow.show()
 	hud.show()
+	_menu_button.show()
 	hud.hide_game_over()
 	hud.hide_result()
 	hud.hide_sell_button()
@@ -654,6 +681,7 @@ func _on_collection_button_pressed() -> void:
 	gameplay_area.hide()
 	toast.hide()
 	hud.hide()
+	_menu_button.hide()
 	skilled_shop.hide()
 	mode_select_menu.hide()
 	$CanvasLayer/MainMenu.hide()
@@ -688,6 +716,7 @@ func _show_main_menu() -> void:
 	menu_bg.show()
 
 	hud.hide()
+	_menu_button.hide()
 	hud.hide_game_over()
 	hud.hide_result()
 	hud.hide_sell_button()
