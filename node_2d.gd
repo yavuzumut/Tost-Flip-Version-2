@@ -90,11 +90,24 @@ func _ready() -> void:
 	_play_menu_intro()
 
 func _create_menu_button() -> void:
-	_menu_button = Button.new()
-	_menu_button.text = "Ana Menü"
+	# OYNA butonunu (MenuButtons'un ilk çocuğu) şablon olarak kopyala
+	var source := $CanvasLayer/MainMenu/MenuButtons.get_child(0) as BaseButton
+	if source == null:
+		push_warning("OYNA butonu bulunamadı, düz buton kullanılıyor.")
+		_menu_button = Button.new()
+		_menu_button.text = "Ana Menü"
+	else:
+		_menu_button = source.duplicate(0) as BaseButton  # 0: sinyaller kopyalanmasın
+		if _menu_button is Button:
+			(_menu_button as Button).text = "ANA MENÜ"
+			_menu_button.add_theme_font_size_override("font_size", 22)  # uzun yazı sığsın diye
+
+	_menu_button.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	_menu_button.focus_mode = Control.FOCUS_NONE
-	_menu_button.position = Vector2(20.0, 180.0)
-	_menu_button.size = Vector2(190.0, 40.0)
+	_menu_button.custom_minimum_size = Vector2(190.0, 64.0)
+	_menu_button.position = Vector2(20.0, 160.0)
+	_menu_button.size = Vector2(190.0, 64.0)
+	_menu_button.pivot_offset = _menu_button.size / 2.0
 	_menu_button.pressed.connect(_show_main_menu)
 	$CanvasLayer.add_child(_menu_button)
 	_menu_button.hide()
