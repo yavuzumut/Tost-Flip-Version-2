@@ -34,6 +34,15 @@ enum GameState { MAIN_MENU, MODE_SELECT, COLLECTION, READY, FLYING, LANDED, RODE
 @onready var table_collision: CollisionShape2D = $GameplayArea/Table/CollisionShape2D
 @onready var plate_collision: CollisionShape2D = $GameplayArea/Plate/CollisionShape2D
 
+@onready var menu_music: AudioStreamPlayer = $MenuMusic
+@onready var menu_music2: AudioStreamPlayer = $MenuMusic2
+@onready var menu_music3: AudioStreamPlayer = $MenuMusic3
+
+@onready var classic_music: AudioStreamPlayer = $KlasikmodandothersMusic
+@onready var galactic_music: AudioStreamPlayer = $GalaktikmodMusic
+
+@onready var fail_music: AudioStreamPlayer = $FailMusic
+
 var active_mode: GameMode = GameMode.CLASSIC
 var skilled_mgr = SkilledModeScript.new()
 var sandwich_mgr = SandwichModeScript.new()
@@ -88,6 +97,9 @@ func _ready() -> void:
 	_show_main_menu()
 	_setup_menu_animations()
 	_play_menu_intro()
+	menu_music.finished.connect(_on_menu_music_finished)
+	menu_music2.finished.connect(_on_menu_music_finished)
+	menu_music3.finished.connect(_on_menu_music_finished)
 
 func _create_menu_button() -> void:
 	# OYNA butonunu (MenuButtons'un ilk çocuğu) şablon olarak kopyala
@@ -406,6 +418,7 @@ func _on_toast_landed(butter_down: bool) -> void:
 
 	var this_round := _round
 	if lives <= 0:
+		fail_music.play()
 		hud.hide_sell_button()
 		state = GameState.GAME_OVER
 		await get_tree().create_timer(1.1).timeout
@@ -576,6 +589,12 @@ func _on_mode_chosen(mode_idx: int) -> void:
 
 
 func start_game(mode: GameMode) -> void:
+	stop_all_music()
+
+	if mode == GameMode.SPACE:
+		galactic_music.play()
+	else:
+		classic_music.play()
 	_apply_rodent_environment(false)
 	active_mode = mode
 	menu_bg.hide()
@@ -740,6 +759,9 @@ func _show_main_menu() -> void:
 	$CanvasLayer/MainMenu.show()
 
 	state = GameState.MAIN_MENU
+	
+	stop_all_music()
+	play_random_menu_music()
 
 
 func _apply_rodent_environment(enabled: bool) -> void:
@@ -950,3 +972,22 @@ func _refresh_sandwich_hud() -> void:
 		sandwich_mgr.total_target
 	)
 	hud.set_sandwich_clicks(sandwich_mgr.clicks_left, sandwich_mgr.MAX_CLICKS)
+func stop_all_music() -> void:
+	menu_music.stop()
+	menu_music2.stop()
+	menu_music3.stop()
+
+	classic_music.stop()
+	galactic_music.stop()
+func play_random_menu_music() -> void:
+	var tracks = [
+		menu_music,
+		menu_music2,
+		menu_music3
+	]
+
+	var selected = tracks.pick_random()
+	selected.play()
+func _on_menu_music_finished() -> void:
+	if state == GameState.MAIN_MENU:
+		play_random_menu_music()

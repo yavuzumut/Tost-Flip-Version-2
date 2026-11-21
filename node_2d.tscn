@@ -8,17 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://ds84w6k6cgw0x" path="res://assets/high_score_note.png" id="7_d21ai"]
 [ext_resource type="Texture2D" uid="uid://c4phve770ousw" path="res://assets/Toasty_Tost_Flip_Logo-removebg-preview.png" id="9_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://d3frmtef2vhss" path="res://assets/collection_ui/tost_flip_koleksiyon_arka_plan_soltost_1920x1080.png" id="10_x0ka3"]
+[ext_resource type="AudioStream" uid="uid://dbsk358dc1brc" path="res://sounds/Menu.mp3" id="22_ei405"]
+[ext_resource type="AudioStream" uid="uid://ciyisxnvstfnh" path="res://sounds/Fail.mp3" id="23_2nhjh"]
+[ext_resource type="AudioStream" uid="uid://batakraf26wmc" path="res://sounds/Menu2.mp3" id="24_bjha6"]
+[ext_resource type="AudioStream" uid="uid://bj7dyfmytmvt8" path="res://sounds/Menu3.mp3" id="25_bjha6"]
+[ext_resource type="AudioStream" uid="uid://dcvmoj1niyki8" path="res://sounds/Klasikmodandothers.mp3" id="26_gt76g"]
+[ext_resource type="AudioStream" uid="uid://dirc7u62ne8jc" path="res://sounds/Galaktikmod.mp3" id="27_1fr6y"]
 [ext_resource type="Script" uid="uid://ush7ygnqehj0" path="res://gameplay/cover_camera.gd" id="ext_cover_camera"]
 [ext_resource type="PackedScene" path="res://ui/hud.tscn" id="ext_hud"]
 [ext_resource type="Texture2D" uid="uid://ck1caivktkvdj" path="res://assets/gameplay/kitchen_back.png" id="ext_kitchen_back"]
 [ext_resource type="PackedScene" path="res://ui/mode_select_menu.tscn" id="ext_mode_menu"]
 [ext_resource type="Texture2D" uid="uid://bwd2st181b7nb" path="res://assets/gameplay/plate.png" id="ext_plate"]
+[ext_resource type="Script" uid="uid://cwm2m6pqouurm" path="res://gameplay/rodent_visuals.gd" id="ext_rodent_visuals"]
 [ext_resource type="PackedScene" path="res://ui/skilled_shop.tscn" id="ext_shop"]
+[ext_resource type="PackedScene" path="res://scenes/space/space_hud.tscn" id="ext_space_hud"]
+[ext_resource type="PackedScene" path="res://scenes/space/space_world.tscn" id="ext_space_world"]
 [ext_resource type="Texture2D" uid="uid://hcimr5nawq8j" path="res://assets/gameplay/table.png" id="ext_table"]
 [ext_resource type="Script" uid="uid://dc8ud8p6w66t4" path="res://gameplay/toast_shadow.gd" id="ext_toast_shadow"]
-[ext_resource type="Script" path="res://gameplay/rodent_visuals.gd" id="ext_rodent_visuals"]
-[ext_resource type="PackedScene" path="res://scenes/space/space_world.tscn" id="ext_space_world"]
-[ext_resource type="PackedScene" path="res://scenes/space/space_hud.tscn" id="ext_space_hud"]
 [ext_resource type="Texture2D" uid="uid://brm8j40pysb2k" path="res://assets/collection_ui/collection_card.png" id="tf_collection_v2_card"]
 [ext_resource type="Texture2D" uid="uid://bbj4l1narssw2" path="res://assets/collection_ui/locked_toast.png" id="tf_collection_v2_lock"]
 
@@ -120,18 +126,19 @@ texture = ExtResource("4_q6r6c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameplayArea/Toast" unique_id=559185884]
 shape = SubResource("RectangleShape2D_7lwn1")
 
-[node name="SpaceWorld" parent="GameplayArea" instance=ExtResource("ext_space_world")]
+[node name="SpaceWorld" parent="GameplayArea" unique_id=868228939 instance=ExtResource("ext_space_world")]
 visible = false
 
-[node name="RodentVisuals" type="Node2D" parent="GameplayArea"]
+[node name="RodentVisuals" type="Node2D" parent="GameplayArea" unique_id=307404241]
 visible = false
 script = ExtResource("ext_rodent_visuals")
 
 [node name="HUD" parent="." unique_id=65521112 instance=ExtResource("ext_hud")]
 visible = false
 
-[node name="SpaceHUD" parent="HUD" instance=ExtResource("ext_space_hud")]
+[node name="SpaceHUD" parent="HUD" unique_id=1049268302 instance=ExtResource("ext_space_hud")]
 visible = false
+anchors_preset = 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=880824027]
 
@@ -631,6 +638,24 @@ visible = false
 
 [node name="SkilledShop" parent="CanvasLayer" unique_id=1049357619 instance=ExtResource("ext_shop")]
 visible = false
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1750982299]
+stream = ExtResource("22_ei405")
+
+[node name="FailMusic" type="AudioStreamPlayer" parent="." unique_id=1438272]
+stream = ExtResource("23_2nhjh")
+
+[node name="MenuMusic2" type="AudioStreamPlayer" parent="." unique_id=1670836505]
+stream = ExtResource("24_bjha6")
+
+[node name="MenuMusic3" type="AudioStreamPlayer" parent="." unique_id=2127597866]
+stream = ExtResource("25_bjha6")
+
+[node name="KlasikmodandothersMusic" type="AudioStreamPlayer" parent="." unique_id=1644877154]
+stream = ExtResource("26_gt76g")
+
+[node name="GalaktikmodMusic" type="AudioStreamPlayer" parent="." unique_id=408296577]
+stream = ExtResource("27_1fr6y")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MenuButtons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MenuButtons/CollectionButton" to="." method="_on_collection_button_pressed"]
