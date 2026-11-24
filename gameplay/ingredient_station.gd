@@ -3,9 +3,10 @@ class_name IngredientStation
 ## Mutfaktaki tıklanabilir malzeme istasyonu. Çarpışma ile malzeme vermez.
 
 const WOOD_TEX := preload("res://assets/skilled/wood_button_pill.png")
-const BUTTER_TEX := preload("res://assets/ui/butter_icon.svg")
+const BUTTER_TEX := preload("res://assets/modes/space/collectibles/05_tereyagi.png")
 const LETTUCE_TEX := preload("res://assets/modes/space/collectibles/03_marul.png")
 const SALAMI_TEX := preload("res://assets/modes/space/collectibles/02_salam.png")
+const JAM_TEX := preload("res://assets/modes/space/collectibles/04_recel_kavanozu.png")
 
 @export var ingredient_id := "butter"
 @export var display_name := "Tereyağı"
@@ -26,7 +27,7 @@ func _ready() -> void:
 	_sprite.scale = Vector2(0.28, 0.42)
 	add_child(_sprite)
 
-	if ingredient_id == "butter" or ingredient_id == "lettuce" or ingredient_id == "salami":
+	if ingredient_id == "butter" or ingredient_id == "lettuce" or ingredient_id == "salami" or ingredient_id == "jam":
 		_icon = Sprite2D.new()
 		match ingredient_id:
 			"butter":
@@ -35,9 +36,11 @@ func _ready() -> void:
 				_icon.texture = LETTUCE_TEX
 			"salami":
 				_icon.texture = SALAMI_TEX
+			"jam":
+				_icon.texture = JAM_TEX
 
 		_icon.position = Vector2(-42, -2)
-		_icon.scale = Vector2(0.7, 0.7) if ingredient_id == "butter" else Vector2(0.08, 0.08)
+		_icon.scale = Vector2(0.05, 0.05) if ingredient_id == "butter" else Vector2(0.08, 0.08)
 		add_child(_icon)
 
 	_label = Label.new()

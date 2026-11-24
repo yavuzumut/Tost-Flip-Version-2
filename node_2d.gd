@@ -874,7 +874,7 @@ func _create_ingredient_stations() -> void:
 		{"id": "lettuce", "name": "Marul", "pos": Vector2(198, 302)},
 		{"id": "butter", "name": "Tereyağı", "pos": Vector2(352, 312)},
 		{"id": "salami", "name": "Salam", "pos": Vector2(508, 306)},
-		{"id": "jam", "name": "Reçel", "pos": Vector2(1090, 390)},
+		{"id": "jam", "name": "Reçel", "pos": Vector2(352, 230)},
 	]
 	for spec in specs:
 		var station: IngredientStation = IngredientStationScript.new()
